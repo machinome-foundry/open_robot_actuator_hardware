@@ -25,6 +25,6 @@ None.
 ## Impact
 
 - Adds a root `pyproject.toml` manifest, the `simulation/` Python package and tests, and project-owned OpenSpec records.
-- Adds solid-node and molejo as development/runtime requirements for the simulation only; no existing electronics, mechanics, STEP, STL, image, drawing, or instruction file is edited.
+- Adds solid-node and molejo as development/runtime requirements for the simulation only; no existing electronics, mechanics, STEP, STL, image, drawing, or assembly-instruction file is edited. The root README receives an additive simulation section.
 - Uses `mechanics/actuator_module_v1/` as the source of truth. The repository's other robot, leg, finger, and testbed assemblies are out of scope because each adds its own shell geometry and kinematic meanings; they can become separate named models later.
 - The core simulation verifies geometry and kinematics, not torque, belt tension, tooth elasticity, encoder electronics, fastener preload, or manufacturing fitness.

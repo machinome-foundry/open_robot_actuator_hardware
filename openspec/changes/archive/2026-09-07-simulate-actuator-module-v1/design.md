@@ -53,6 +53,7 @@ The actuator core is held by a robot-specific shell, but no single shell belongs
 - The published center distances and pitch radii almost exactly close the nominal belts: 149.886 mm versus 150 mm and 201.107 mm versus 201 mm. This supports the drawing's geometry independently of the assembly image.
 - The file named `motor_antigravity_4004_custom_shaft.STEP` contains one 3.99 mm-diameter, 33.4 mm-long shaft solid rather than the whole motor; the motor body must therefore remain catalogue/reference geometry.
 - The center 10-tooth STEP is 19 mm long while its toothed portion runs from 2.5 mm to 16.5 mm. It both keys into the printed 30-tooth center pulley and leaves a second belt track exposed, explaining the compact coaxial two-stage stack.
+- At the documented shared origin, the upstream center-pinion STEP and center-gear STL overlap by 0.104727 mm³ on the faceted geometry. The assembly instructions define this as a press-fit subassembly; `simulation/seats.py` records the pair and bounded volume so a new, changed, or removed overlap fails instead of being hidden by an epsilon.
 - The core cannot prove shell bearing-seat support or whole-actuator non-interference without choosing one of the repository's robot-specific shell designs. This first model proves the reusable transmission only.
 
 ### Findings for the framework

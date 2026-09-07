@@ -15,11 +15,11 @@ The simulated motor, center, and output axes SHALL be parallel to +Z, with the c
 - **THEN** geometry measurements locate the three axes at `(0, 0)`, `(43.9, 0)`, and `(113.8, 0)` millimetres within 0.02 mm
 
 ### Requirement: Coaxial component stacks
-The motor pulley and shaft, the center pinion and 30-tooth pulley, and the output pulley and its two reference bearings SHALL each share one axis without positive-volume rigid-body interference.
+The motor pulley and shaft, the center pinion and 30-tooth pulley, and the output pulley and its two reference bearings SHALL each share one axis. The rigid-part interference inventory SHALL contain exactly the documented center pinion/gear press fit, bounded from 0.08 through 0.13 mm³, and no other positive-volume overlap.
 
 #### Scenario: Core stack is assembled
 - **WHEN** the actuator core is built
-- **THEN** contracts prove each stack is coaxial, every rigid piece is one connected body, and distinct rigid pieces share no positive volume
+- **THEN** contracts prove each stack is coaxial, every rigid piece is one connected body, and the exact interference inventory contains only the bounded center pinion/gear press fit
 
 ### Requirement: Honest reusable-core boundary
 The simulation SHALL identify the robot-specific structural shell, force and torque behaviour, belt preload, electronics, and manufacturing certification as outside the actuator-core model.

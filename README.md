@@ -59,6 +59,57 @@ and [simulation/README.md](simulation/README.md) for source and license scope.
 [Hardware Overview](#open-robot-actuator-hardware)  
 [Software Overview](https://github.com/open-dynamic-robot-initiative/open-dynamic-robot-initiative.github.io/wiki)  
 
+## Actuator Module Core v1 simulation
+
+The additive `simulation/` package makes the reusable v1 actuator core an
+executable solid-node machine. It imports the published STEP/STL parts as-is,
+adds clearly coloured reference envelopes for bought parts, and represents the
+150 mm and 201 mm AT3 belts with molejo. It intentionally does not simulate the
+robot-specific shells, legs, electronics, or motor physics.
+
+From the repository root in the LibreSolid Studio development workspace:
+
+```sh
+PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid build
+PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid test --faceted simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid test --exact simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid develop
+```
+
+Build or inspect the model ground-up in this order: `MotorStack`,
+`CenterStack`, `OutputStack`, the two `TensionerStack` instances, then
+`ActuatorModuleV1`, which adds both flexible belts and binds every internal
+port. The subassemblies intentionally require their angle ports to be bound by
+the root; expand them in the viewer tree rather than treating them as separate
+machines.
+
+The only control is `input_angle`, in degrees. The center stack follows at
+`input_angle / 3`, and the output follows at `input_angle / 9`. `Home` returns
+the input to 0 degrees, `Inspect Reduction` moves it to 810 degrees (270 degrees
+at center and 90 degrees at output), and `One Output Turn` moves it to 3240
+degrees. These are slow inspection motions, not motor speed claims.
+
+Measured findings are retained in [`docs/measurements.md`](docs/measurements.md),
+and the source probe can be repeated with:
+
+```sh
+PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/python -m simulation.tools.probe
+```
+
+The documented center distances close the nominal belts within 0.115 mm before
+tensioner deflection. The motor STEP contains the custom shaft only, so the
+motor body is reference geometry. The upstream center pinion and printed gear
+form a documented press fit; their bounded 0.104727 mm³ faceted overlap is the
+only accepted rigid-pair intersection. Copper denotes the reference stator,
+dark grey the rotor, cyan the printed pulleys, silver bought/machined hardware,
+black the codewheel, white printed tensioners/mount, and yellow the belts.
+
+This model proves source connectivity, shaft layout, coaxial bearing placement,
+two 3:1 stages, belt circulation, instruction endpoints, and the explicit
+interference inventory. It does not predict belt preload or elasticity, torque,
+backlash under load, encoder electronics, thermal behaviour, fastener preload,
+manufacturing fitness, or support from any robot-specific shell.
+
 ## Authors
 Jonathan Fiene  
 Thomas Flayols  
