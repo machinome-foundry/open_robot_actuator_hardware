@@ -10,10 +10,9 @@
 ---
 ## Printing Tolerances
 
-<img src="../images/shell_preparation_3_1.png" width="500"><br>*Shell base and shell cover - the critical surfaces are colored yellow*  
 
 * the printing tolerances vary significantly depending on the supplier, the printing technology and even between orders from the same supplier
-* the critical surfaces for the shells are the bearing seats (colored yellow in the screenshot above)
+* the critical surfaces for the shells are the bearing seats
 * if the bearing seat diameters are too tight you can use a end mill to adjust the diameter
 * if the bearing seat diameters are much too large the bearings will not be held securely and the parts might not be usable
 * ideally you can produce the 3d printed parts on your own 3d printer

@@ -1,0 +1,21 @@
+Open Robot Actuator Hardware — Open Dynamic Robot Initiative
+https://github.com/open-dynamic-robot-initiative/open_robot_actuator_hardware
+
+Upstream README authors: Jonathan Fiene, Thomas Flayols and Felix Grimminger.
+Copyright (c) 2019, New York University and Max Planck Gesellschaft,
+as recorded in LICENSE; README additionally records 2019–2021.
+License: BSD-3-Clause. The complete original notice, conditions and disclaimer
+remain in LICENSE, including the non-endorsement condition.
+Simulation source baseline: 66af1522b4fba0ec4a1d7790e66f5e4652208d30
+(a source commit, not a release-version claim).
+
+Foundry simulation and supporting work:
+Copyright 2026 Luis Henrique Cassis Fagundes.
+The layer loads the actuator-module-v1 source parts, uses the documented
+layout and belt geometry, and adds motion, tests and reference hardware.
+The original design is not claimed as Luis's independent work.
+See NOTICE for the exact grant and modification scope.
+
+Licensing record added 2026-09-21 in a history rewrite. Prior recipients'
+grants and upstream rights remain intact; preserved commit author dates do
+not backdate this publication. No upstream endorsement is implied.

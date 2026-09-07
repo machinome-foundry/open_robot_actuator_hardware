@@ -1,0 +1,40 @@
+Open Robot Actuator Hardware Foundry simulation
+
+Upstream copyright (c) 2019, New York University and Max Planck Gesellschaft.
+Authors and source: see CREDITS. The original BSD-3-Clause grant remains in
+LICENSE, including its conditions, disclaimer and non-endorsement clause.
+No upstream copyright or license notice is replaced.
+
+Luis Henrique Cassis Fagundes's original 2026 Foundry contributions are
+AGPL-3.0-or-later, with the complete text in simulation/LICENSE.
+Covered paths as introduced in the Foundry series: simulation/*.py and
+simulation/tools/*.py; the Foundry docs/ and openspec/ records; pyproject.toml;
+Luis's additions to README.md and .gitignore; CREDITS, this NOTICE and
+simulation/README.md. This grant covers Luis's contributions, not ownership
+of upstream designs, documentation or assets.
+
+Source mapping and modifications, 2026-09-21:
+- simulation/actuator.py selects source STEP/STL parts from
+  mechanics/actuator_module_v1, adds kinematics and analytic belts, and
+  represents reference motor geometry where the source supplies only a shaft.
+- layout.py records documented centers, tooth counts and belt dimensions;
+  seats.py records measured interference.
+- tests and tools/probe.py check source and assembly measurements.
+- docs/ records the source readings and motion-helper checks.
+The upstream geometry and implementation are unchanged. Incorporated source
+material retains BSD attribution alongside the AGPL grant on additions.
+
+Four screenshots explicitly identified by upstream documentation are removed:
+mechanics/quadruped_robot_12dof_v1.1/images/quadruped_component_overview_1.png
+mechanics/biped_6dof_v1/images/imu_position_1.png
+mechanics/quadruped_robot_12dof_v1/images/imu_location_1.png
+mechanics/actuator_module_v1/images/shell_preparation_3_1.png
+Their embeds/caption references are removed from five upstream documents;
+other photographs and illustrations are unchanged. Original screenshots
+remain recoverable in upstream history and the old-branch backup.
+
+BSD notices and disclaimer must accompany source and binary redistribution
+as specified in LICENSE. Preserve both texts and applicable notices with
+mixed source. Exports containing upstream designs retain applicable source
+terms; executing AGPL software does not itself make all output AGPL.
+Prior recipients' grants remain intact.

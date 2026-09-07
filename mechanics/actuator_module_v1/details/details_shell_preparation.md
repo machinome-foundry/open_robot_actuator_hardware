@@ -79,7 +79,6 @@ Cut the threads all the way through the shell*
 
 ## Adjusting the Bearing Seats
 
-<img src="../images/shell_preparation_3_1.png" width="500"> <br>*The bearing seats are marked yellow in this screenshot.*
 
 
 * The tolerances of the 3d printed parts can vary quite a bit depending on the printing technology, the printer settings and the material.

@@ -1,5 +1,10 @@
 # Open Robot Actuator Hardware
 
+Foundry licensing: the upstream design retains BSD-3-Clause, including its
+non-endorsement condition. Luis Henrique Cassis Fagundes's original simulation
+contributions are AGPL-3.0-or-later. See [CREDITS](CREDITS), [NOTICE](NOTICE)
+and [simulation/README.md](simulation/README.md) for source and license scope.
+
 **Click on the pictures below for more information**
 ## Electronics
 | TI Evaluation Boards  | BLMC µDriver | Master Board |Details Wiring|
@@ -60,7 +65,8 @@ Thomas Flayols
 Felix Grimminger  
 
 ## License
-BSD 3-Clause License
+Upstream: BSD 3-Clause License. Foundry additions: scoped AGPL-3.0-or-later;
+see [NOTICE](NOTICE). The original BSD text remains in [LICENSE](LICENSE).
 
 ## Copyright
 Copyright (c) 2019-2021, Max Planck Gesellschaft and New York University

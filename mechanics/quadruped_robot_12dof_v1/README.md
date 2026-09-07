@@ -275,7 +275,6 @@ All the information on how to order the components and build the robot yourself 
 * more information about the conventions that we use for our robots: [Conventions](../general/conventions.md#conventions)
 
 ## Inertial Sensor Origin Position
-<img src="images/imu_location_1.png" width="500"><br>*IMU Mounting Position - the IMU is colored red in the screenshot above.*<br>
 
 * the IMU is mounted in the front of the robot
 * the label on the IMU is pointing downwards (see picture below)

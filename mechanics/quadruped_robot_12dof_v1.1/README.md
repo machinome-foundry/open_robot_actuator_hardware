@@ -11,9 +11,6 @@
 * there is a status led ring with 12 RGB leds on the top of the robot
 * there are two payload interfaces with mounting holes to attach additional components to the top or the bottom of the robot
 * the estimated weight increase for this upgrade is about 300g
-* the components that were upgraded are marked red in the screenshot below
-
-<img src="images/quadruped_component_overview_1.png" width="600"><br>*Quadruped 12dof v1.1 Overview - the updated components are marked in red.* <br>
 
 <img src="images/quadruped_12dof_v1.1_4.jpg" width="500"><br>*Quadruped Robot 12dof v1.1 - Top View*<br>
 

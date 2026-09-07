@@ -291,7 +291,6 @@ More wiring information: [Details Wiring](../../electronics/details/details_wiri
 * more information about the conventions that we use for our robots: [Conventions](../general/conventions.md#conventions)
 
 ## Inertial Sensor Origin Position
-<img src="images/imu_position_1.png" width="350"> <br>*IMU position - the IMU is colored red in the screenshot above*
 
 * the IMU is mounted to the top element of the body structure
 * the label on the IMU is pointing downwards (see picture below)
