@@ -13,11 +13,10 @@ from solid_node.node import (
     AssemblyNode,
     CadQueryNode,
     MolejoNode,
-    RotationalPort,
     StepNode,
     StlNode,
-    TranslationalPort,
 )
+from solid_node.motion.ports import RotationalPort, TranslationalPort
 from solid_node.simulation import Driver, Instruction
 
 from .layout import (
