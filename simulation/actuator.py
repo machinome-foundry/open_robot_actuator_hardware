@@ -4,8 +4,6 @@
 
 """Brushless Actuator Module Core v1 simulation."""
 
-from math import pi
-
 import cadquery as cq
 from molejo import P, Polygon, Shape, Teeth, Wrap
 
@@ -16,7 +14,8 @@ from solid_node.node import (
     StepNode,
     StlNode,
 )
-from solid_node.motion.ports import RotationalPort, TranslationalPort
+from solid_node.motion.joints import Revolute
+from solid_node.motion.ports import TranslationalPort
 from solid_node.simulation import Driver, Instruction
 
 from .layout import (
@@ -29,17 +28,19 @@ from .layout import (
     MOTOR_CENTER,
     OUTPUT_CENTER,
     PINION_PITCH_RADIUS,
+    PITCH_ARC_PER_DEGREE,
     SECOND_BELT_TEETH,
     SECOND_BELT_WIDTH,
     SECOND_STAGE_Z,
     SEATING_GAP,
+    STAGE_RATIO,
+    TENSIONER_DEG_PER_MM,
     TENSIONER_X,
     TENSIONER_Y,
 )
 
 
 SOURCE_ROOT = "../mechanics/actuator_module_v1"
-AXIS = (0, 0, 1)
 
 
 class MotorShaft(StepNode):
@@ -72,12 +73,16 @@ class CenterPinion(StepNode):
     color = "#d8dde3"
     angular_deflection = 0.5
 
+    spin = Revolute(axis=(0, 0, 1), unit="deg")
+
 
 class CenterGear(StlNode):
     """The upstream printed 30-tooth first-stage pulley."""
 
     stl_source = f"{SOURCE_ROOT}/stl_files/transmission_pulley_at3_t30_center.STL"
     color = "#77cdd1"
+
+    spin = Revolute(axis=(0, 0, 1), unit="deg")
 
 
 class OutputPulley(StlNode):
@@ -86,12 +91,16 @@ class OutputPulley(StlNode):
     stl_source = f"{SOURCE_ROOT}/stl_files/transmission_pulley_at3_t30_output.STL"
     color = "#77cdd1"
 
+    spin = Revolute(axis=(0, 0, 1), at=(0, 0, SECOND_STAGE_Z), unit="deg")
+
 
 class TensionerRoller(StlNode):
     """The upstream default 10.0 mm tensioner roller."""
 
     stl_source = f"{SOURCE_ROOT}/stl_files/transmission_belt_tensioner_roller_10.0mm.STL"
     color = "#f2f2eb"
+
+    spin = Revolute(axis=(0, 0, 1), at=(0, 0, SECOND_STAGE_Z), unit="deg")
 
 
 class MotorRotorEnvelope(CadQueryNode):
@@ -166,7 +175,7 @@ class TensionerBearing(CadQueryNode):
 class MotorStack(AssemblyNode):
     """Rigidly driven motor rotor, shaft, pulley, and encoder stack."""
 
-    angle = RotationalPort(unit="deg")
+    turn = Revolute(axis=(0, 0, 1), unit="deg")
 
     rotor = MotorRotorEnvelope()
     shaft = MotorShaft()
@@ -180,19 +189,9 @@ class MotorStack(AssemblyNode):
         # The assembly instructions put the mount about 2 mm from the shaft end.
         self.codewheel_mount.translate((0, 0, -28.7))
 
-    def simulate(self):
-        if self.angle.value is None:
-            raise ValueError("MotorStack.angle must be bound by its parent")
-        for child in (self.rotor, self.shaft, self.codewheel_mount, self.codewheel):
-            child.rotate(self.angle.value, AXIS)
-        # Motion is composed inside rest placement; this STEP's native axis is +Y.
-        self.pulley.rotate(self.angle.value, (0, 1, 0))
-
 
 class CenterStack(AssemblyNode):
     """Coaxial 30-tooth gear and 10-tooth second-stage pinion."""
-
-    angle = RotationalPort(unit="deg")
 
     pinion = CenterPinion()
     gear = CenterGear()
@@ -204,18 +203,9 @@ class CenterStack(AssemblyNode):
         self.lower_bearing.translate((0, 0, -2.0 - SEATING_GAP))
         self.upper_bearing.translate((0, 0, 19.0 + SEATING_GAP))
 
-    def simulate(self):
-        if self.angle.value is None:
-            raise ValueError("CenterStack.angle must be bound by its parent")
-        # Motion is composed inside rest placement; this STEP's native axis is +Y.
-        self.pinion.rotate(self.angle.value, (0, 1, 0))
-        self.gear.rotate(self.angle.value, AXIS)
-
 
 class OutputStack(AssemblyNode):
     """Driven output pulley and two shell-reference bearings."""
-
-    angle = RotationalPort(unit="deg")
 
     pulley = OutputPulley()
     lower_bearing = OutputBearing()
@@ -226,16 +216,9 @@ class OutputStack(AssemblyNode):
         self.lower_bearing.translate((0, 0, SECOND_STAGE_Z - 8.2 - 4.0 - SEATING_GAP))
         self.upper_bearing.translate((0, 0, SECOND_STAGE_Z + 8.2 + SEATING_GAP))
 
-    def simulate(self):
-        if self.angle.value is None:
-            raise ValueError("OutputStack.angle must be bound by its parent")
-        self.pulley.rotate(self.angle.value, AXIS)
-
 
 class TensionerStack(AssemblyNode):
     """Default printed roller around its bought bearing."""
-
-    angle = RotationalPort(unit="deg")
 
     roller = TensionerRoller()
     bearing = TensionerBearing()
@@ -243,11 +226,6 @@ class TensionerStack(AssemblyNode):
     def render(self):
         self.roller.translate((0, 0, SECOND_STAGE_Z))
         self.bearing.translate((0, 0, SECOND_STAGE_Z - 1.0 + SEATING_GAP))
-
-    def simulate(self):
-        if self.angle.value is None:
-            raise ValueError("TensionerStack.angle must be bound by its parent")
-        self.roller.rotate(self.angle.value, AXIS)
 
 
 class FirstStageBelt(MolejoNode):
@@ -326,6 +304,15 @@ class ActuatorModuleV1(AssemblyNode):
     first_belt = FirstStageBelt()
     second_belt = SecondStageBelt()
 
+    input_angle.drives(motor_stack.turn)
+    motor_stack.turn.drives(center_stack.gear.spin, ratio=STAGE_RATIO)
+    center_stack.gear.spin.drives(center_stack.pinion.spin)
+    center_stack.pinion.spin.drives(output_stack.pulley.spin, ratio=STAGE_RATIO)
+    motor_stack.turn.drives(first_belt.travel, ratio=PITCH_ARC_PER_DEGREE)
+    center_stack.pinion.spin.drives(second_belt.travel, ratio=PITCH_ARC_PER_DEGREE)
+    second_belt.travel.drives(upper_tensioner.roller.spin, ratio=TENSIONER_DEG_PER_MM)
+    second_belt.travel.drives(lower_tensioner.roller.spin, ratio=TENSIONER_DEG_PER_MM)
+
     def render(self):
         self.center_stack.translate((*CENTER_CENTER, 0))
         self.output_stack.translate((*OUTPUT_CENTER, 0))
@@ -333,16 +320,3 @@ class ActuatorModuleV1(AssemblyNode):
         self.lower_tensioner.translate((TENSIONER_X, -TENSIONER_Y, 0))
         self.first_belt.translate((0, 0, FIRST_STAGE_Z))
         self.second_belt.translate((0, 0, SECOND_STAGE_Z))
-
-    def simulate(self):
-        center_angle = self.input_angle / 3.0
-        output_angle = self.input_angle / 9.0
-        second_belt_travel = center_angle * PINION_PITCH_RADIUS * pi / 180.0
-
-        self.motor_stack.angle = self.input_angle
-        self.center_stack.angle = center_angle
-        self.output_stack.angle = output_angle
-        self.upper_tensioner.angle = -second_belt_travel * 180.0 / (5.0 * pi)
-        self.lower_tensioner.angle = -second_belt_travel * 180.0 / (5.0 * pi)
-        self.first_belt.travel = self.input_angle * PINION_PITCH_RADIUS * pi / 180.0
-        self.second_belt.travel = second_belt_travel
