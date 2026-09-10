@@ -73,7 +73,7 @@ class CenterPinion(StepNode):
     color = "#d8dde3"
     angular_deflection = 0.5
 
-    spin = Revolute(axis=(0, 0, 1), unit="deg")
+    spin = Revolute(axis=(0, 1, 0), unit="deg")
 
 
 class CenterGear(StlNode):
@@ -91,7 +91,7 @@ class OutputPulley(StlNode):
     stl_source = f"{SOURCE_ROOT}/stl_files/transmission_pulley_at3_t30_output.STL"
     color = "#77cdd1"
 
-    spin = Revolute(axis=(0, 0, 1), at=(0, 0, SECOND_STAGE_Z), unit="deg")
+    spin = Revolute(axis=(0, 0, 1), unit="deg")
 
 
 class TensionerRoller(StlNode):
@@ -100,7 +100,7 @@ class TensionerRoller(StlNode):
     stl_source = f"{SOURCE_ROOT}/stl_files/transmission_belt_tensioner_roller_10.0mm.STL"
     color = "#f2f2eb"
 
-    spin = Revolute(axis=(0, 0, 1), at=(0, 0, SECOND_STAGE_Z), unit="deg")
+    spin = Revolute(axis=(0, 0, 1), unit="deg")
 
 
 class MotorRotorEnvelope(CadQueryNode):
