@@ -13,7 +13,7 @@ from pathlib import Path
 
 import cadquery as cq
 import trimesh
-from solid_node.node.adapters.step import StepAssembly
+from machinome.node.adapters.step import StepAssembly
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]

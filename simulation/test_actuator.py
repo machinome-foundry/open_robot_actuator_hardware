@@ -8,8 +8,8 @@ from math import hypot
 
 import numpy as np
 
-from solid_node.simulation import ScenarioTest
-from solid_node.test import TestCase
+from machinome.simulation import ScenarioTest
+from machinome.test import TestCase
 
 from .actuator import ActuatorModuleV1
 from .layout import FIRST_PATH_LENGTH, SECOND_PATH_LENGTH

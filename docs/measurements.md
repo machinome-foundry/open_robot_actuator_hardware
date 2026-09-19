@@ -5,7 +5,7 @@ modify or repair the upstream CAD. Reproduce the source inventory from the
 repository root with:
 
 ```sh
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/python -m simulation.tools.probe
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/python -m simulation.tools.probe
 ```
 
 ## Documented layout

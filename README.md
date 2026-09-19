@@ -62,18 +62,18 @@ and [simulation/README.md](simulation/README.md) for source and license scope.
 ## Actuator Module Core v1 simulation
 
 The additive `simulation/` package makes the reusable v1 actuator core an
-executable solid-node machine. It imports the published STEP/STL parts as-is,
+executable machinome machine. It imports the published STEP/STL parts as-is,
 adds clearly coloured reference envelopes for bought parts, and represents the
 150 mm and 201 mm AT3 belts with molejo. It intentionally does not simulate the
 robot-specific shells, legs, electronics, or motor physics.
 
-From the repository root in the LibreSolid Studio development workspace:
+From the repository root in the Machinome Studio development workspace:
 
 ```sh
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid build
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid test --faceted simulation/actuator.py
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid test --exact simulation/actuator.py
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/solid develop
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome build
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --faceted simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --exact simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome develop
 ```
 
 Build or inspect the model ground-up in this order: `MotorStack`,
@@ -93,7 +93,7 @@ Measured findings are retained in [`docs/measurements.md`](docs/measurements.md)
 and the source probe can be repeated with:
 
 ```sh
-PYTHONPATH="$PWD" /home/asa/devel/libresolid-studio/.venv/bin/python -m simulation.tools.probe
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/python -m simulation.tools.probe
 ```
 
 The documented center distances close the nominal belts within 0.115 mm before

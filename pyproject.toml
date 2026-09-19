@@ -5,22 +5,22 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "open-robot-actuator-hardware-simulation"
 version = "0.1.0"
-description = "A thin solid-node simulation layer for the Open Robot Actuator hardware"
+description = "A thin machinome simulation layer for the Open Robot Actuator hardware"
 requires-python = ">=3.11"
 dependencies = [
   "cadquery>=2.7",
   "molejo>=0.2",
-  "solid-node>=0.6",
+  "machinome>=0.6",
 ]
 
 [tool.setuptools.packages.find]
 include = ["simulation*"]
 
-[tool.solid-node]
+[tool.machinome]
 model = "actuator-module-v1"
 
-[tool.solid-node.models]
+[tool.machinome.models]
 actuator-module-v1 = "simulation.actuator:ActuatorModuleV1"
 
-[tool.libresolid-studio]
+[tool.machinome-studio]
 profile = "builder"

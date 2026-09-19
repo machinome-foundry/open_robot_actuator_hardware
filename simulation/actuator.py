@@ -7,16 +7,16 @@
 import cadquery as cq
 from molejo import P, Polygon, Shape, Teeth, Wrap
 
-from solid_node.node import (
+from machinome.node import (
     AssemblyNode,
     CadQueryNode,
     MolejoNode,
     StepNode,
     StlNode,
 )
-from solid_node.motion.joints import Revolute
-from solid_node.motion.ports import TranslationalPort
-from solid_node.simulation import Driver, Instruction
+from machinome.motion.joints import Revolute
+from machinome.motion.ports import TranslationalPort
+from machinome.simulation import Driver, Instruction
 
 from .layout import (
     AT3_PITCH,
