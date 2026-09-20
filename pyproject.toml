@@ -11,6 +11,7 @@ dependencies = [
   "cadquery>=2.7",
   "molejo>=0.2",
   "machinome>=0.6",
+  "machinome-mechanics",
 ]
 
 [tool.setuptools.packages.find]
