@@ -6,7 +6,8 @@
 
 from math import asin, pi, sqrt
 
-from machinome_mechanics import rolling_angle, rolling_travel
+from machinome_mechanics import (pulley_pitch_radius, rolling_angle,
+                                 rolling_travel)
 
 
 MOTOR_CENTER = (0.0, 0.0)
@@ -21,8 +22,8 @@ SECOND_BELT_TEETH = 67
 FIRST_BELT_WIDTH = 4.0
 SECOND_BELT_WIDTH = 6.0
 
-PINION_PITCH_RADIUS = AT3_PITCH * PINION_TEETH / (2 * pi)
-GEAR_PITCH_RADIUS = AT3_PITCH * GEAR_TEETH / (2 * pi)
+PINION_PITCH_RADIUS = pulley_pitch_radius(PINION_TEETH, AT3_PITCH)
+GEAR_PITCH_RADIUS = pulley_pitch_radius(GEAR_TEETH, AT3_PITCH)
 
 STAGE_RATIO = PINION_TEETH / GEAR_TEETH
 PITCH_ARC_PER_DEGREE = rolling_travel(1.0, PINION_PITCH_RADIUS)
