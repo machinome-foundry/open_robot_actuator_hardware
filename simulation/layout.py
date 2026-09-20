@@ -6,7 +6,7 @@
 
 from math import asin, pi, sqrt
 
-from machinome_mechanics import rolling_travel
+from machinome_mechanics import rolling_angle, rolling_travel
 
 
 MOTOR_CENTER = (0.0, 0.0)
@@ -27,7 +27,7 @@ GEAR_PITCH_RADIUS = AT3_PITCH * GEAR_TEETH / (2 * pi)
 STAGE_RATIO = PINION_TEETH / GEAR_TEETH
 PITCH_ARC_PER_DEGREE = rolling_travel(1.0, PINION_PITCH_RADIUS)
 TENSIONER_ROLLER_RADIUS = 5.0
-TENSIONER_DEG_PER_MM = -180.0 / (TENSIONER_ROLLER_RADIUS * pi)
+TENSIONER_DEG_PER_MM = -rolling_angle(1.0, TENSIONER_ROLLER_RADIUS)
 
 FIRST_STAGE_Z = 3.3
 SECOND_STAGE_Z = 13.5
