@@ -24,4 +24,4 @@ model = "actuator-module-v1"
 actuator-module-v1 = "simulation.actuator:ActuatorModuleV1"
 
 [tool.machinome-studio]
-profile = "builder"
+profile = "openspec-builder"
