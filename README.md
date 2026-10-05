@@ -71,8 +71,8 @@ From the repository root in the Machinome Studio development workspace:
 
 ```sh
 PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome build
-PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --faceted simulation/actuator.py
-PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --exact simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --mesh simulation/actuator.py
+PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome test --brep simulation/actuator.py
 PYTHONPATH="$PWD" /home/asa/devel/machinome-studio/.venv/bin/machinome develop
 ```
 

@@ -7,13 +7,11 @@
 import cadquery as cq
 from molejo import P, Polygon, Shape, Teeth, Wrap
 
-from machinome.node import (
-    AssemblyNode,
-    CadQueryNode,
-    MolejoNode,
-    StepNode,
-    StlNode,
-)
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.molejo import MolejoNode
+from machinome.node.step import StepNode
+from machinome.node.stl import StlNode
 from machinome.motion.joints import Revolute
 from machinome.motion.ports import TranslationalPort
 from machinome.simulation import Driver, Instruction

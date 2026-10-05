@@ -26,8 +26,8 @@ matched exactly as Python floats. A supported deferred pitch
 4.7746482927568605 mm. Validation commands were:
 
 ```sh
-/home/asa/devel/machinome-studio/.venv/bin/machinome test --faceted simulation/actuator.py
-/home/asa/devel/machinome-studio/.venv/bin/machinome test --exact simulation/actuator.py
+/home/asa/devel/machinome-studio/.venv/bin/machinome test --mesh simulation/actuator.py
+/home/asa/devel/machinome-studio/.venv/bin/machinome test --brep simulation/actuator.py
 /home/asa/devel/machinome-studio/.venv/bin/machinome build
 /home/asa/devel/machinome-studio/.venv/bin/machinome snapshot -o /tmp/actuator-pulley-rest.png --autocenter
 /home/asa/devel/machinome-studio/.venv/bin/machinome snapshot -o /tmp/actuator-pulley-810.png --autocenter --drive input_angle=810

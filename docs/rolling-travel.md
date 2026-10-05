@@ -19,7 +19,7 @@ export PYTHONPATH="$PWD:/home/asa/devel/machinome-studio/WTs/mechanics-rolling-t
 
 The executables were `/home/asa/devel/machinome-studio/.venv/bin/python` and
 `/home/asa/devel/machinome-studio/.venv/bin/machinome`; the latter ran
-`test --faceted simulation/actuator.py`, `test --exact
+`test --mesh simulation/actuator.py`, `test --brep
 simulation/actuator.py`, `build`, and these two snapshot commands:
 
 ```sh
