@@ -6,7 +6,7 @@
 
 from math import asin, pi, sqrt
 
-from machinome_mechanics import (pulley_pitch_radius, rolling_angle,
+from machinome.mechanics import (pulley_pitch_radius, rolling_angle,
                                  rolling_travel)
 
 
